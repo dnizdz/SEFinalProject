@@ -28,8 +28,6 @@ namespace SEFinalProject {
         }
 
         private void MainWindow_Load(Object sender, EventArgs e) {
-            this.pictureBox.Focus();
-
             ReaderCollection readers = ReaderCollection.GetReaders();
             if (readers.Count == 0) {
                 // Fingerprint Reader Not Found
@@ -59,11 +57,7 @@ namespace SEFinalProject {
 
                 if (!CaptureFinger(ref fid)) break;
                 if (fid == null) {
-                    Bitmap bmp = new Bitmap(1, 1);
-                    bmp.SetPixel(0, 0, Color.White);
-                    bmp = new Bitmap(bmp, pictureBox.Width, pictureBox.Height);
-
-                    RefreshImageDelegate rid = new RefreshImageDelegate(RefreshImage);
+                    RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
                     this.Invoke(rid, new Object[] { null });
 
                     continue;
@@ -71,14 +65,26 @@ namespace SEFinalProject {
 
                 foreach (Fid.Fiv fiv in fid.Views) {
                     Bitmap bmp = CreateBitmap(fiv.RawImage, fiv.Width, fiv.Height);
-                    RefreshImageDelegate rid = new RefreshImageDelegate(RefreshImage);
+                    RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
                     this.Invoke(rid, new Object[] { bmp });
                 }
             }
         }
 
-        private delegate void RefreshImageDelegate(Bitmap bmp);
-        private void RefreshImage(Bitmap bmp) {
+        private delegate void RefreshUIDelegate(Bitmap bmp);
+        private void RefreshUI(Bitmap bmp) {
+            if (bmp == null) {
+                this.nameTextBox.Text = "";
+                this.roleTextBox.Text = "";
+                this.operationTextBox.Text = "";
+                this.timeTextBox.Text = "";
+            } else {
+                this.nameTextBox.Text = "Jason";
+                this.roleTextBox.Text = "Admin";
+                this.operationTextBox.Text = "Clock In";
+                this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
+            }
+
             pictureBox.Image = bmp;
             pictureBox.Refresh();
         }
@@ -132,6 +138,10 @@ namespace SEFinalProject {
             if (fingerprintReader != null) {
                 fingerprintReader.Dispose();
             }
+        }
+
+        private void MainWindow_Activated(object sender, EventArgs e) {
+            this.pictureBox.Focus();
         }
     }
 }
