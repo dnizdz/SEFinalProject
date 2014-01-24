@@ -79,10 +79,12 @@ namespace SEFinalProject {
                 this.operationTextBox.Text = "";
                 this.timeTextBox.Text = "";
             } else {
-                this.nameTextBox.Text = "Jason";
-                this.roleTextBox.Text = "Admin";
-                this.operationTextBox.Text = "Clock In";
+                /*
+                this.nameTextBox.Text = "Unknown";
+                this.roleTextBox.Text = "Unknown";
+                this.operationTextBox.Text = "Unknown";
                 this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
+                */
             }
 
             pictureBox.Image = bmp;
