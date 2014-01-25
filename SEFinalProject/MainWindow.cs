@@ -16,6 +16,7 @@ namespace SEFinalProject {
     public partial class MainWindow : Form {
         public Reader fingerprintReader { get; set; }
         private Thread imageCaptureThread;
+        private AdminPage adminPage;
 
         public MainWindow() {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace SEFinalProject {
         public void InitializeVars() {
             this.pictureBox.Image = null;
             this.imageCaptureThread = null;
+            this.adminPage = null;
         }
 
         private void MainWindow_Load(Object sender, EventArgs e) {
@@ -85,6 +87,12 @@ namespace SEFinalProject {
                 this.operationTextBox.Text = "Unknown";
                 this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
                 */
+
+                if (adminPage == null || adminPage.IsDisposed) {
+                    adminPage = new AdminPage(this);
+                }
+
+                adminPage.Show();
             }
 
             pictureBox.Image = bmp;
@@ -140,6 +148,8 @@ namespace SEFinalProject {
             if (fingerprintReader != null) {
                 fingerprintReader.Dispose();
             }
+
+            this.imageCaptureThread.Abort();
         }
 
         private void MainWindow_Activated(object sender, EventArgs e) {

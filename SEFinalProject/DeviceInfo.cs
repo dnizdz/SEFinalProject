@@ -45,7 +45,7 @@ namespace SEFinalProject {
 
         private void DeviceInfo_Activated(object sender, EventArgs e) {
             this.tableLayoutPanel1.Focus();
-
+            this.refreshTextBox();
         }
 
         private void infoRichTextBox_Enter(object sender, EventArgs e) {

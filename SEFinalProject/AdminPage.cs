@@ -11,15 +11,30 @@ using System.Windows.Forms;
 namespace SEFinalProject {
     public partial class AdminPage : Form {
         private MainWindow mainWindow;
+        private DateTime date;
+        private DeviceInfo deviceInfo;
 
         public AdminPage(MainWindow mainWindow) {
             InitializeComponent();
             this.Activated += new System.EventHandler(this.AdminPage_Activated);
             this.mainWindow = mainWindow;
+            this.deviceInfo = null;
         }
 
         private void AdminPage_Activated(object sender, EventArgs e) {
             this.groupBox1.Focus();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
+            this.date = dateTimePicker1.Value;
+        }
+
+        private void deviceInfoBtn_Click(object sender, EventArgs e) {
+            if (deviceInfo == null || deviceInfo.IsDisposed) {
+                deviceInfo = new DeviceInfo(mainWindow);
+            }
+
+            deviceInfo.Show();
         }
     }
 }

@@ -23,17 +23,18 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.roleLabel = new System.Windows.Forms.Label();
-            this.roleTextBox = new System.Windows.Forms.TextBox();
-            this.operationLabel = new System.Windows.Forms.Label();
-            this.operationTextBox = new System.Windows.Forms.TextBox();
-            this.timeLabel = new System.Windows.Forms.Label();
             this.timeTextBox = new System.Windows.Forms.TextBox();
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.operationTextBox = new System.Windows.Forms.TextBox();
+            this.operationLabel = new System.Windows.Forms.Label();
+            this.roleTextBox = new System.Windows.Forms.TextBox();
+            this.roleLabel = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -81,62 +82,14 @@
             this.panel1.Size = new System.Drawing.Size(478, 135);
             this.panel1.TabIndex = 1;
             // 
-            // nameLabel
+            // timeTextBox
             // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(9, 10);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(51, 20);
-            this.nameLabel.TabIndex = 0;
-            this.nameLabel.Text = "Name";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(94, 7);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.ReadOnly = true;
-            this.nameTextBox.Size = new System.Drawing.Size(375, 26);
-            this.nameTextBox.TabIndex = 1;
-            // 
-            // roleLabel
-            // 
-            this.roleLabel.AutoSize = true;
-            this.roleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roleLabel.Location = new System.Drawing.Point(9, 42);
-            this.roleLabel.Name = "roleLabel";
-            this.roleLabel.Size = new System.Drawing.Size(42, 20);
-            this.roleLabel.TabIndex = 2;
-            this.roleLabel.Text = "Role";
-            // 
-            // roleTextBox
-            // 
-            this.roleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roleTextBox.Location = new System.Drawing.Point(94, 39);
-            this.roleTextBox.Name = "roleTextBox";
-            this.roleTextBox.ReadOnly = true;
-            this.roleTextBox.Size = new System.Drawing.Size(375, 26);
-            this.roleTextBox.TabIndex = 3;
-            // 
-            // operationLabel
-            // 
-            this.operationLabel.AutoSize = true;
-            this.operationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationLabel.Location = new System.Drawing.Point(9, 74);
-            this.operationLabel.Name = "operationLabel";
-            this.operationLabel.Size = new System.Drawing.Size(79, 20);
-            this.operationLabel.TabIndex = 4;
-            this.operationLabel.Text = "Operation";
-            // 
-            // operationTextBox
-            // 
-            this.operationTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.operationTextBox.Location = new System.Drawing.Point(94, 71);
-            this.operationTextBox.Name = "operationTextBox";
-            this.operationTextBox.ReadOnly = true;
-            this.operationTextBox.Size = new System.Drawing.Size(375, 26);
-            this.operationTextBox.TabIndex = 5;
+            this.timeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeTextBox.Location = new System.Drawing.Point(94, 103);
+            this.timeTextBox.Name = "timeTextBox";
+            this.timeTextBox.ReadOnly = true;
+            this.timeTextBox.Size = new System.Drawing.Size(375, 26);
+            this.timeTextBox.TabIndex = 7;
             // 
             // timeLabel
             // 
@@ -148,14 +101,62 @@
             this.timeLabel.TabIndex = 6;
             this.timeLabel.Text = "Time";
             // 
-            // timeTextBox
+            // operationTextBox
             // 
-            this.timeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeTextBox.Location = new System.Drawing.Point(94, 103);
-            this.timeTextBox.Name = "timeTextBox";
-            this.timeTextBox.ReadOnly = true;
-            this.timeTextBox.Size = new System.Drawing.Size(375, 26);
-            this.timeTextBox.TabIndex = 7;
+            this.operationTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.operationTextBox.Location = new System.Drawing.Point(94, 71);
+            this.operationTextBox.Name = "operationTextBox";
+            this.operationTextBox.ReadOnly = true;
+            this.operationTextBox.Size = new System.Drawing.Size(375, 26);
+            this.operationTextBox.TabIndex = 5;
+            // 
+            // operationLabel
+            // 
+            this.operationLabel.AutoSize = true;
+            this.operationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.operationLabel.Location = new System.Drawing.Point(9, 74);
+            this.operationLabel.Name = "operationLabel";
+            this.operationLabel.Size = new System.Drawing.Size(79, 20);
+            this.operationLabel.TabIndex = 4;
+            this.operationLabel.Text = "Operation";
+            // 
+            // roleTextBox
+            // 
+            this.roleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roleTextBox.Location = new System.Drawing.Point(94, 39);
+            this.roleTextBox.Name = "roleTextBox";
+            this.roleTextBox.ReadOnly = true;
+            this.roleTextBox.Size = new System.Drawing.Size(375, 26);
+            this.roleTextBox.TabIndex = 3;
+            // 
+            // roleLabel
+            // 
+            this.roleLabel.AutoSize = true;
+            this.roleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roleLabel.Location = new System.Drawing.Point(9, 42);
+            this.roleLabel.Name = "roleLabel";
+            this.roleLabel.Size = new System.Drawing.Size(42, 20);
+            this.roleLabel.TabIndex = 2;
+            this.roleLabel.Text = "Role";
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameTextBox.Location = new System.Drawing.Point(94, 7);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ReadOnly = true;
+            this.nameTextBox.Size = new System.Drawing.Size(375, 26);
+            this.nameTextBox.TabIndex = 1;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Location = new System.Drawing.Point(9, 10);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(51, 20);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Text = "Name";
             // 
             // MainWindow
             // 
@@ -164,6 +165,7 @@
             this.ClientSize = new System.Drawing.Size(484, 561);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
