@@ -10,12 +10,15 @@ using System.Windows.Forms;
 
 namespace SEFinalProject {
     public partial class AdminPage : Form {
-        public AdminPage() {
+        private MainWindow mainWindow;
+
+        public AdminPage(MainWindow mainWindow) {
             InitializeComponent();
-            this.Activated += AdminPage_Activated;
+            this.Activated += new System.EventHandler(this.AdminPage_Activated);
+            this.mainWindow = mainWindow;
         }
 
-        void AdminPage_Activated(object sender, EventArgs e) {
+        private void AdminPage_Activated(object sender, EventArgs e) {
             this.groupBox1.Focus();
         }
     }

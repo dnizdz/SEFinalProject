@@ -25,22 +25,21 @@
         private void InitializeComponent() {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.deleteBtn = new System.Windows.Forms.Button();
-            this.enrollBtn = new System.Windows.Forms.Button();
-            this.calibrateBtn = new System.Windows.Forms.Button();
-            this.resetDeviceBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.EmployeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClockInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClockOutTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.deleteBtn = new System.Windows.Forms.Button();
+            this.enrollBtn = new System.Windows.Forms.Button();
+            this.deviceInfoBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -54,7 +53,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 178F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 143F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1008, 561);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -67,81 +66,10 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1002, 377);
+            this.groupBox1.Size = new System.Drawing.Size(1002, 412);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Report";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(59, 22);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(934, 26);
-            this.dateTimePicker1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Date";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.deleteBtn);
-            this.groupBox2.Controls.Add(this.enrollBtn);
-            this.groupBox2.Controls.Add(this.calibrateBtn);
-            this.groupBox2.Controls.Add(this.resetDeviceBtn);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 386);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1002, 172);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Fingerprint Management";
-            // 
-            // deleteBtn
-            // 
-            this.deleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteBtn.Location = new System.Drawing.Point(11, 133);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(982, 30);
-            this.deleteBtn.TabIndex = 3;
-            this.deleteBtn.Text = "Delete Data";
-            this.deleteBtn.UseVisualStyleBackColor = true;
-            // 
-            // enrollBtn
-            // 
-            this.enrollBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enrollBtn.Location = new System.Drawing.Point(11, 97);
-            this.enrollBtn.Name = "enrollBtn";
-            this.enrollBtn.Size = new System.Drawing.Size(982, 30);
-            this.enrollBtn.TabIndex = 2;
-            this.enrollBtn.Text = "Enroll New Fingerprint";
-            this.enrollBtn.UseVisualStyleBackColor = true;
-            // 
-            // calibrateBtn
-            // 
-            this.calibrateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.calibrateBtn.Location = new System.Drawing.Point(11, 63);
-            this.calibrateBtn.Name = "calibrateBtn";
-            this.calibrateBtn.Size = new System.Drawing.Size(982, 30);
-            this.calibrateBtn.TabIndex = 1;
-            this.calibrateBtn.Text = "Calibrate Device";
-            this.calibrateBtn.UseVisualStyleBackColor = true;
-            // 
-            // resetDeviceBtn
-            // 
-            this.resetDeviceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetDeviceBtn.Location = new System.Drawing.Point(11, 27);
-            this.resetDeviceBtn.Name = "resetDeviceBtn";
-            this.resetDeviceBtn.Size = new System.Drawing.Size(982, 30);
-            this.resetDeviceBtn.TabIndex = 0;
-            this.resetDeviceBtn.Text = "Reset Device";
-            this.resetDeviceBtn.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -156,7 +84,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(13, 54);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(980, 317);
+            this.dataGridView1.Size = new System.Drawing.Size(980, 352);
             this.dataGridView1.TabIndex = 2;
             // 
             // EmployeeID
@@ -187,6 +115,66 @@
             this.ClockOutTime.Name = "ClockOutTime";
             this.ClockOutTime.ReadOnly = true;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(59, 22);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(934, 26);
+            this.dateTimePicker1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Date";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.deleteBtn);
+            this.groupBox2.Controls.Add(this.enrollBtn);
+            this.groupBox2.Controls.Add(this.deviceInfoBtn);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(3, 421);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1002, 137);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Fingerprint Management";
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteBtn.Location = new System.Drawing.Point(9, 97);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(984, 30);
+            this.deleteBtn.TabIndex = 3;
+            this.deleteBtn.Text = "Delete Data";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            // 
+            // enrollBtn
+            // 
+            this.enrollBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enrollBtn.Location = new System.Drawing.Point(9, 61);
+            this.enrollBtn.Name = "enrollBtn";
+            this.enrollBtn.Size = new System.Drawing.Size(984, 30);
+            this.enrollBtn.TabIndex = 2;
+            this.enrollBtn.Text = "Enroll New Fingerprint";
+            this.enrollBtn.UseVisualStyleBackColor = true;
+            // 
+            // deviceInfoBtn
+            // 
+            this.deviceInfoBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deviceInfoBtn.Location = new System.Drawing.Point(9, 25);
+            this.deviceInfoBtn.Name = "deviceInfoBtn";
+            this.deviceInfoBtn.Size = new System.Drawing.Size(984, 30);
+            this.deviceInfoBtn.TabIndex = 1;
+            this.deviceInfoBtn.Text = "View Device Info";
+            this.deviceInfoBtn.UseVisualStyleBackColor = true;
+            // 
             // AdminPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,8 +189,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -214,8 +202,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button enrollBtn;
-        private System.Windows.Forms.Button calibrateBtn;
-        private System.Windows.Forms.Button resetDeviceBtn;
+        private System.Windows.Forms.Button deviceInfoBtn;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;

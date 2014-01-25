@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace SEFinalProject {
     public partial class MainWindow : Form {
-        private Reader fingerprintReader;
+        public Reader fingerprintReader { get; set; }
         private Thread imageCaptureThread;
 
         public MainWindow() {
