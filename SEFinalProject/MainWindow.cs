@@ -1,5 +1,6 @@
 ﻿using DPCtlUruNet;
 using DPUruNet;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +16,9 @@ using System.Windows.Forms;
 namespace SEFinalProject {
     public partial class MainWindow : Form {
         public Reader fingerprintReader { get; set; }
-        private Thread imageCaptureThread;
+        public Thread imageCaptureThread { get; set; }
         private AdminPage adminPage;
+        private const Int32 PROBABILITY_ONE = 0x7fffffff;
 
         public MainWindow() {
             InitializeComponent();
@@ -47,13 +49,13 @@ namespace SEFinalProject {
                     this.Close();
                 }
 
-                imageCaptureThread = new Thread(CaptureThread);
+                imageCaptureThread = new Thread(ImageCaptureThread);
                 imageCaptureThread.IsBackground = true;
                 imageCaptureThread.Start();
             }
         }
 
-        private void CaptureThread() {
+        private void ImageCaptureThread() {
             while (true) {
                 Fid fid = null;
 
@@ -65,6 +67,12 @@ namespace SEFinalProject {
                     continue;
                 }
 
+                DataResult<Fmd> resultConversion = FeatureExtraction.CreateFmdFromFid(fid, Constants.Formats.Fmd.ANSI);
+                if (resultConversion.ResultCode != Constants.ResultCode.DP_SUCCESS) break;
+
+                Fmd nowBeingScanned = resultConversion.Data;
+                // foreach data in database, compare
+
                 foreach (Fid.Fiv fiv in fid.Views) {
                     Bitmap bmp = CreateBitmap(fiv.RawImage, fiv.Width, fiv.Height);
                     RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
@@ -73,20 +81,22 @@ namespace SEFinalProject {
             }
         }
 
-        private delegate void RefreshUIDelegate(Bitmap bmp);
-        private void RefreshUI(Bitmap bmp) {
+        private delegate void RefreshUIDelegate(Bitmap bmp, Boolean isMatch);
+        private void RefreshUI(Bitmap bmp, Boolean isMatch) {
             if (bmp == null) {
                 this.nameTextBox.Text = "";
                 this.roleTextBox.Text = "";
                 this.operationTextBox.Text = "";
                 this.timeTextBox.Text = "";
             } else {
-                /*
-                this.nameTextBox.Text = "Unknown";
-                this.roleTextBox.Text = "Unknown";
-                this.operationTextBox.Text = "Unknown";
-                this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
-                */
+                if (isMatch) {
+
+                } else {
+                    this.nameTextBox.Text = "Unknown";
+                    this.roleTextBox.Text = "Unknown";
+                    this.operationTextBox.Text = "Unknown";
+                    this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
+                }
 
                 if (adminPage == null || adminPage.IsDisposed) {
                     adminPage = new AdminPage(this);

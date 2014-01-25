@@ -17,8 +17,9 @@ namespace SEFinalProject {
 
             infoRichTextBox.Text = String.Empty;
 
-            infoRichTextBox.Text += "Device Name: " + r.Description.Name + "\n";
+            infoRichTextBox.Text += "Device Name: " + r.Description.Name.Remove(r.Description.Name.LastIndexOf(r.Description.SerialNumber)) + "\n";
             infoRichTextBox.Text += "Serial Number: " + r.Description.SerialNumber + "\n";
+            infoRichTextBox.Text += "Technology: " + r.Description.Technology + "\n";
             infoRichTextBox.Text += "Can Capture: " + r.Capabilities.CanCapture.ToString() + "\n";
             infoRichTextBox.Text += "Can Stream: " + r.Capabilities.CanStream.ToString() + "\n";
             infoRichTextBox.Text += "Extract Features: " + r.Capabilities.ExtractFeatures.ToString() + "\n";
