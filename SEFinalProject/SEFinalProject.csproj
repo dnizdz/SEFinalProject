@@ -91,6 +91,7 @@
     <Compile Include="DeviceInfo.Designer.cs">
       <DependentUpon>DeviceInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeData.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

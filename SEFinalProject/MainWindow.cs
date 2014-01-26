@@ -1,6 +1,7 @@
 ﻿using DPCtlUruNet;
 using DPUruNet;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,9 @@ namespace SEFinalProject {
         public Reader fingerprintReader { get; set; }
         public Thread imageCaptureThread { get; set; }
         private AdminPage adminPage;
+
+        private MySqlConnection mySQLConnection;
+
         private const Int32 PROBABILITY_ONE = 0x7fffffff;
 
         public MainWindow() {
@@ -29,6 +33,7 @@ namespace SEFinalProject {
             this.pictureBox.Image = null;
             this.imageCaptureThread = null;
             this.adminPage = null;
+            this.mySQLConnection = null;
         }
 
         private void MainWindow_Load(Object sender, EventArgs e) {
@@ -53,6 +58,14 @@ namespace SEFinalProject {
                 imageCaptureThread.IsBackground = true;
                 imageCaptureThread.Start();
             }
+
+            try {
+                this.mySQLConnection = new MySqlConnection("SERVER=localhost;DATABASE=se;UID=root;PASSWORD=;");
+                this.mySQLConnection.Open();
+            } catch (MySqlException) {
+                MessageBox.Show(this, "Error Connecting To Database!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void ImageCaptureThread() {
@@ -62,7 +75,7 @@ namespace SEFinalProject {
                 if (!CaptureFinger(ref fid)) break;
                 if (fid == null) {
                     RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
-                    this.Invoke(rid, new Object[] { null });
+                    this.Invoke(rid, new Object[] { null, null });
 
                     continue;
                 }
@@ -71,38 +84,44 @@ namespace SEFinalProject {
                 if (resultConversion.ResultCode != Constants.ResultCode.DP_SUCCESS) break;
 
                 Fmd nowBeingScanned = resultConversion.Data;
+                EmployeeData result = null;
                 // foreach data in database, compare
+
 
                 foreach (Fid.Fiv fiv in fid.Views) {
                     Bitmap bmp = CreateBitmap(fiv.RawImage, fiv.Width, fiv.Height);
                     RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
-                    this.Invoke(rid, new Object[] { bmp });
+                    this.Invoke(rid, new Object[] { bmp, result });
                 }
             }
         }
 
-        private delegate void RefreshUIDelegate(Bitmap bmp, Boolean isMatch);
-        private void RefreshUI(Bitmap bmp, Boolean isMatch) {
+        private delegate void RefreshUIDelegate(Bitmap bmp, EmployeeData employeeData);
+        private void RefreshUI(Bitmap bmp, EmployeeData employeeData) {
             if (bmp == null) {
-                this.nameTextBox.Text = "";
-                this.roleTextBox.Text = "";
-                this.operationTextBox.Text = "";
-                this.timeTextBox.Text = "";
+                this.nameTextBox.Text = String.Empty;
+                this.roleTextBox.Text = String.Empty;
+                this.operationTextBox.Text = String.Empty;
+                this.timeTextBox.Text = String.Empty;
             } else {
-                if (isMatch) {
+                if (employeeData != null) {
+                    this.nameTextBox.Text = employeeData.name;
+                    this.roleTextBox.Text = employeeData.role;
+                    if (employeeData.clockOut.HasValue) {
+                        this.operationTextBox.Text = "Clock Out";
+                        this.timeTextBox.Text = ((DateTime)employeeData.clockOut).ToString("h:mm:ss tt");
+                    } else if (employeeData.clockIn.HasValue) {
+                        this.operationTextBox.Text = "Clock In";
+                        this.timeTextBox.Text = ((DateTime)employeeData.clockOut).ToString("h:mm:ss tt");
+                    }
 
-                } else {
-                    this.nameTextBox.Text = "Unknown";
-                    this.roleTextBox.Text = "Unknown";
-                    this.operationTextBox.Text = "Unknown";
-                    this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
+                    if (employeeData.role.Equals("Administrator")) {
+                        if (adminPage == null || adminPage.IsDisposed) {
+                            adminPage = new AdminPage(this);
+                        }
+                        adminPage.Show();
+                    }
                 }
-
-                if (adminPage == null || adminPage.IsDisposed) {
-                    adminPage = new AdminPage(this);
-                }
-
-                adminPage.Show();
             }
 
             pictureBox.Image = bmp;
@@ -110,7 +129,7 @@ namespace SEFinalProject {
         }
 
         private Boolean CaptureFinger(ref Fid fid) {
-            CaptureResult captureResult = fingerprintReader.Capture(Constants.Formats.Fid.ANSI, Constants.CaptureProcessing.DP_IMG_PROC_DEFAULT, 5000, fingerprintReader.Capabilities.Resolutions.FirstOrDefault());
+            CaptureResult captureResult = fingerprintReader.Capture(Constants.Formats.Fid.ANSI, Constants.CaptureProcessing.DP_IMG_PROC_DEFAULT, 2500, fingerprintReader.Capabilities.Resolutions.FirstOrDefault());
             if (captureResult.ResultCode != Constants.ResultCode.DP_SUCCESS) {
                 return false;
             }
@@ -160,6 +179,7 @@ namespace SEFinalProject {
             }
 
             this.imageCaptureThread.Abort();
+            this.mySQLConnection.Close();
         }
 
         private void MainWindow_Activated(object sender, EventArgs e) {

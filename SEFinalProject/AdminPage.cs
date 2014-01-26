@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace SEFinalProject {
     public partial class AdminPage : Form {
         private MainWindow mainWindow;
-        private DateTime date;
+        private DateTime? date;
         private DeviceInfo deviceInfo;
 
         public AdminPage(MainWindow mainWindow) {
