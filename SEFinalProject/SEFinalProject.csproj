@@ -85,6 +85,12 @@
     <Compile Include="AdminPage.Designer.cs">
       <DependentUpon>AdminPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataDeletionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataDeletionForm.Designer.cs">
+      <DependentUpon>DataDeletionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeviceInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AdminPage.resx">
       <DependentUpon>AdminPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataDeletionForm.resx">
+      <DependentUpon>DataDeletionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeviceInfo.resx">
       <DependentUpon>DeviceInfo.cs</DependentUpon>

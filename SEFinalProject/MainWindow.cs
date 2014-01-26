@@ -86,77 +86,8 @@ namespace SEFinalProject {
                 Fmd nowBeingScanned = resultConversion.Data;
                 EmployeeData result = null;
                 Boolean isMatch = false;
-                // foreach data in database, compare
-                try {
-                    MySqlCommand cmd1 = new MySqlCommand("SELECT * FROM employee", mySQLConnection);
-                    MySqlDataReader reader1 = cmd1.ExecuteReader();
-
-                    while (reader1.Read()) {
-                        Fmd currentChecked = JsonConvert.DeserializeObject<Fmd>(reader1.GetString("fmd"));
-                        CompareResult compareResult = Comparison.Compare(nowBeingScanned, 0, currentChecked, 0);
-
-                        if (compareResult.ResultCode != Constants.ResultCode.DP_SUCCESS) {
-                            break;
-                        }
-
-                        if (compareResult.Score < PROBABILITY_ONE / 100000) {
-                            isMatch = true;
-                            result = new EmployeeData();
-
-                            result.empID = reader1.GetInt64("empID");
-                            result.name = reader1.GetString("name");
-                            result.role = reader1.GetString("role");
-                            result.fmd = currentChecked;
-
-                            // Check Attendance
-                            MySqlCommand cmd2 = new MySqlCommand();
-                            cmd2.Connection = mySQLConnection;
-                            cmd2.CommandText = "SELECT * FROM attendance WHERE empID = " + result.empID + " AND clockin BETWEEN \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00\' AND \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59\'";
-                            MySqlDataReader reader2 = cmd2.ExecuteReader();
-
-                            if (reader2.HasRows) {
-                                // Has clocked in, but hasn't clocked out
-                                Boolean hasClockedOut = false;
-                                while (reader2.Read()) {
-                                    if (reader2.IsDBNull(reader2.GetOrdinal("clockout")))  {
-                                        hasClockedOut = true;
-                                        break;
-                                    }
-                                }
-
-                                if (!hasClockedOut) {
-                                    MySqlCommand cmd3 = new MySqlCommand();
-                                    cmd3.Connection = mySQLConnection;
-                                    cmd3.CommandText = "UPDATE attendance SET clockout=@clockout WHERE clockin BETWEEN @clockinstart AND @clockinend";
-                                    cmd3.Prepare();
-
-                                    cmd3.Parameters.AddWithValue("@clockout", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                                    cmd3.Parameters.AddWithValue("@clockinstart", DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
-                                    cmd3.Parameters.AddWithValue("@clockinend", DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
-
-                                    cmd3.ExecuteNonQuery();
-                                }
-                            } else {
-                                // Has not clocked in
-                                MySqlCommand cmd3 = new MySqlCommand();
-                                cmd3.Connection = mySQLConnection;
-                                cmd3.CommandText = "INSERT INTO attendance(empID, clockin, clockout) VALUES(@empID,@clockin,@clockout)";
-                                cmd3.Prepare();
-
-                                cmd3.Parameters.AddWithValue("@empID", result.empID);
-                                cmd3.Parameters.AddWithValue("@clockin", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                                cmd3.Parameters.AddWithValue("@clockout", "NULL");
-
-                                cmd3.ExecuteNonQuery();
-                            }
-
-                            break;
-                        }
-                    }
-                } catch (MySqlException) {
-                    MessageBox.Show(this, "Error Retrieving Data From Database!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
-                }
+                CheckAttendanceDelegate cad = new CheckAttendanceDelegate(CheckAttendance);
+                this.Invoke(cad, new Object[] { nowBeingScanned, result, isMatch });
 
                 if (!isMatch) {
                     RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
@@ -170,6 +101,81 @@ namespace SEFinalProject {
                     RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
                     this.Invoke(rid, new Object[] { bmp, result });
                 }
+            }
+        }
+
+        private delegate void CheckAttendanceDelegate(Fmd nowBeingScanned, ref EmployeeData result, ref Boolean isMatch);
+        private void CheckAttendance(Fmd nowBeingScanned, ref EmployeeData result, ref Boolean isMatch) {
+            // foreach data in database, compare
+            try {
+                MySqlCommand cmd1 = new MySqlCommand("SELECT * FROM employee", mySQLConnection);
+                MySqlDataReader reader1 = cmd1.ExecuteReader();
+
+                while (reader1.Read()) {
+                    Fmd currentChecked = JsonConvert.DeserializeObject<Fmd>(reader1.GetString("fmd"));
+                    CompareResult compareResult = Comparison.Compare(nowBeingScanned, 0, currentChecked, 0);
+
+                    if (compareResult.ResultCode != Constants.ResultCode.DP_SUCCESS) {
+                        break;
+                    }
+
+                    if (compareResult.Score < PROBABILITY_ONE / 100000) {
+                        isMatch = true;
+                        result = new EmployeeData();
+
+                        result.empID = reader1.GetInt64("empID");
+                        result.name = reader1.GetString("name");
+                        result.role = reader1.GetString("role");
+                        result.fmd = currentChecked;
+
+                        // Check Attendance
+                        MySqlCommand cmd2 = new MySqlCommand();
+                        cmd2.Connection = mySQLConnection;
+                        cmd2.CommandText = "SELECT * FROM attendance WHERE empID = " + result.empID + " AND clockin BETWEEN \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00\' AND \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59\'";
+                        MySqlDataReader reader2 = cmd2.ExecuteReader();
+
+                        if (reader2.HasRows) {
+                            // Has clocked in, but hasn't clocked out
+                            Boolean hasClockedOut = false;
+                            while (reader2.Read()) {
+                                if (reader2.IsDBNull(reader2.GetOrdinal("clockout"))) {
+                                    hasClockedOut = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasClockedOut) {
+                                MySqlCommand cmd3 = new MySqlCommand();
+                                cmd3.Connection = mySQLConnection;
+                                cmd3.CommandText = "UPDATE attendance SET clockout=@clockout WHERE clockin BETWEEN @clockinstart AND @clockinend";
+                                cmd3.Prepare();
+
+                                cmd3.Parameters.AddWithValue("@clockout", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                                cmd3.Parameters.AddWithValue("@clockinstart", DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00");
+                                cmd3.Parameters.AddWithValue("@clockinend", DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59");
+
+                                cmd3.ExecuteNonQuery();
+                            }
+                        } else {
+                            // Has not clocked in
+                            MySqlCommand cmd3 = new MySqlCommand();
+                            cmd3.Connection = mySQLConnection;
+                            cmd3.CommandText = "INSERT INTO attendance(empID, clockin, clockout) VALUES(@empID,@clockin,@clockout)";
+                            cmd3.Prepare();
+
+                            cmd3.Parameters.AddWithValue("@empID", result.empID);
+                            cmd3.Parameters.AddWithValue("@clockin", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            cmd3.Parameters.AddWithValue("@clockout", "NULL");
+
+                            cmd3.ExecuteNonQuery();
+                        }
+
+                        break;
+                    }
+                }
+            } catch (MySqlException) {
+                MessageBox.Show(this, "Error Retrieving Data From Database!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
         }
 
