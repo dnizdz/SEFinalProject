@@ -108,7 +108,7 @@ namespace SEFinalProject {
                             result.id = reader1.GetInt64("empID");
                             result.name = reader1.GetString("name");
                             result.role = reader1.GetString("role");
-                            result.fmd = reader1.GetString("fmd");
+                            result.fmd = currentChecked;
 
                             // Check Attendance
                             MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM attendance WHERE empID = " + result.id + " AND clockin BETWEEN \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00\' AND \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59\'", mySQLConnection);
