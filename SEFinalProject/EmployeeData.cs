@@ -10,6 +10,7 @@ namespace SEFinalProject {
             this.id = 0;
             this.name = String.Empty;
             this.role = String.Empty;
+            this.fmd = String.Empty;
             this.clockIn = null;
             this.clockOut = null;
         }
@@ -17,6 +18,7 @@ namespace SEFinalProject {
         public Int64 id { get; set; }
         public String name { get; set; }
         public String role { get; set; }
+        public String fmd { get; set; }
         public DateTime? clockIn { get; set; }
         public DateTime? clockOut { get; set; }
     }

@@ -17,10 +17,11 @@ using System.Windows.Forms;
 namespace SEFinalProject {
     public partial class MainWindow : Form {
         public Reader fingerprintReader { get; set; }
-        public Thread imageCaptureThread { get; set; }
+        public Thread imageCaptureAndDBProcessingThread { get; set; }
         private AdminPage adminPage;
 
-        private MySqlConnection mySQLConnection;
+        public MySqlConnection mySQLConnection;
+        public MySqlDataAdapter mySQLDataAdapter;
 
         private const Int32 PROBABILITY_ONE = 0x7fffffff;
 
@@ -31,9 +32,10 @@ namespace SEFinalProject {
 
         public void InitializeVars() {
             this.pictureBox.Image = null;
-            this.imageCaptureThread = null;
+            this.imageCaptureAndDBProcessingThread = null;
             this.adminPage = null;
             this.mySQLConnection = null;
+            this.mySQLDataAdapter = null;
         }
 
         private void MainWindow_Load(Object sender, EventArgs e) {
@@ -54,9 +56,9 @@ namespace SEFinalProject {
                     this.Close();
                 }
 
-                imageCaptureThread = new Thread(ImageCaptureThread);
-                imageCaptureThread.IsBackground = true;
-                imageCaptureThread.Start();
+                imageCaptureAndDBProcessingThread = new Thread(ImageCaptureAndDBProcessingThread);
+                imageCaptureAndDBProcessingThread.IsBackground = true;
+                imageCaptureAndDBProcessingThread.Start();
             }
 
             try {
@@ -68,7 +70,7 @@ namespace SEFinalProject {
             }
         }
 
-        private void ImageCaptureThread() {
+        private void ImageCaptureAndDBProcessingThread() {
             while (true) {
                 Fid fid = null;
 
@@ -85,8 +87,53 @@ namespace SEFinalProject {
 
                 Fmd nowBeingScanned = resultConversion.Data;
                 EmployeeData result = null;
+                Boolean isMatch = false;
                 // foreach data in database, compare
+                try {
+                    MySqlCommand cmd1 = new MySqlCommand("SELECT * FROM employee", mySQLConnection);
+                    MySqlDataReader reader1 = cmd1.ExecuteReader();
 
+                    while (reader1.Read()) {
+                        Fmd currentChecked = JsonConvert.DeserializeObject<Fmd>(reader1.GetString("fmd"));
+                        CompareResult compareResult = Comparison.Compare(nowBeingScanned, 0, currentChecked, 0);
+
+                        if (compareResult.ResultCode != Constants.ResultCode.DP_SUCCESS) {
+                            break;
+                        }
+
+                        if (compareResult.Score < PROBABILITY_ONE / 100000) {
+                            isMatch = true;
+                            result = new EmployeeData();
+
+                            result.id = reader1.GetInt64("empID");
+                            result.name = reader1.GetString("name");
+                            result.role = reader1.GetString("role");
+                            result.fmd = reader1.GetString("fmd");
+
+                            // Check Attendance
+                            MySqlCommand cmd2 = new MySqlCommand("SELECT * FROM attendance WHERE empID = " + result.id + " AND clockin BETWEEN \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00\' AND \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59\'", mySQLConnection);
+                            MySqlDataReader reader2 = cmd2.ExecuteReader();
+
+                            if (reader2.HasRows) {
+
+                            } else {
+
+                            }
+
+                            break;
+                        }
+                    }
+                } catch (MySqlException) {
+                    MessageBox.Show(this, "Error Retrieving Data From Database!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+
+                if (!isMatch) {
+                    RefreshUIDelegate rid = new RefreshUIDelegate(RefreshUI);
+                    this.Invoke(rid, new Object[] { null, null });
+
+                    continue;
+                }
 
                 foreach (Fid.Fiv fiv in fid.Views) {
                     Bitmap bmp = CreateBitmap(fiv.RawImage, fiv.Width, fiv.Height);
@@ -121,6 +168,11 @@ namespace SEFinalProject {
                         }
                         adminPage.Show();
                     }
+                } else {
+                    this.nameTextBox.Text = "Unknown";
+                    this.roleTextBox.Text = "Unknown";
+                    this.operationTextBox.Text = "Unknown";
+                    this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
                 }
             }
 
@@ -178,7 +230,7 @@ namespace SEFinalProject {
                 fingerprintReader.Dispose();
             }
 
-            this.imageCaptureThread.Abort();
+            this.imageCaptureAndDBProcessingThread.Abort();
             this.mySQLConnection.Close();
         }
 
