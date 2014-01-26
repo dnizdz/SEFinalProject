@@ -1,6 +1,6 @@
 ﻿using DPUruNet;
 using System;
-//ini johan yang comment
+
 namespace SEFinalProject {
     class EmployeeData {
         public EmployeeData() {
