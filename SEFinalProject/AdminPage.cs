@@ -37,5 +37,13 @@ namespace SEFinalProject {
 
             deviceInfo.Show();
         }
+
+        private void enrollBtn_Click(object sender, EventArgs e) {
+
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e) {
+
+        }
     }
 }
