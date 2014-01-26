@@ -21,7 +21,6 @@ namespace SEFinalProject {
         private AdminPage adminPage;
 
         public MySqlConnection mySQLConnection;
-        public MySqlDataAdapter mySQLDataAdapter;
 
         private const Int32 PROBABILITY_ONE = 0x7fffffff;
 
@@ -35,7 +34,6 @@ namespace SEFinalProject {
             this.imageCaptureAndDBProcessingThread = null;
             this.adminPage = null;
             this.mySQLConnection = null;
-            this.mySQLDataAdapter = null;
         }
 
         private void MainWindow_Load(Object sender, EventArgs e) {

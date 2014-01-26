@@ -14,12 +14,14 @@ namespace SEFinalProject {
         private MainWindow mainWindow;
         private DateTime? date;
         private DeviceInfo deviceInfo;
+        private DataDeletionForm dataDeletionForm;
 
         public AdminPage(MainWindow mainWindow) {
             InitializeComponent();
             this.Activated += new System.EventHandler(this.AdminPage_Activated);
             this.mainWindow = mainWindow;
             this.deviceInfo = null;
+            this.dataDeletionForm = null;
         }
 
         private void AdminPage_Activated(object sender, EventArgs e) {
@@ -43,7 +45,11 @@ namespace SEFinalProject {
         }
 
         private void deleteBtn_Click(object sender, EventArgs e) {
+            if (dataDeletionForm == null || dataDeletionForm.IsDisposed) {
+                dataDeletionForm = new DataDeletionForm(mainWindow);
+            }
 
+            dataDeletionForm.Show();
         }
     }
 }
