@@ -81,7 +81,7 @@ namespace SEFinalProject {
 
                 Fmd nowBeingScanned = resultConversion.Data;
                 EmployeeData result = null;
-                // foreach data in database, compare
+
                 try {
                     MySqlConnection mySQLConnection = new MySqlConnection("SERVER=localhost;DATABASE=se;UID=root;PASSWORD=;");
                     mySQLConnection.Open();
