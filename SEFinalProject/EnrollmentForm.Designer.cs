@@ -33,7 +33,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EnrollmentForm";
-            this.Text = "EnrollmentForm";
+            this.Text = "Enrollment Form";
             this.Activated += new System.EventHandler(this.EnrollmentForm_Activated);
             this.ResumeLayout(false);
 

@@ -37,7 +37,7 @@
             this.deleteBtn = new System.Windows.Forms.Button();
             this.enrollBtn = new System.Windows.Forms.Button();
             this.deviceInfoBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.refreshBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -61,7 +61,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.refreshBtn);
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.label1);
@@ -129,7 +129,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 27);
+            this.label1.Location = new System.Drawing.Point(9, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 20);
             this.label1.TabIndex = 0;
@@ -182,14 +182,14 @@
             this.deviceInfoBtn.UseVisualStyleBackColor = true;
             this.deviceInfoBtn.Click += new System.EventHandler(this.deviceInfoBtn_Click);
             // 
-            // button1
+            // refreshBtn
             // 
-            this.button1.Location = new System.Drawing.Point(890, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 26);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Refresh";
-            this.button1.UseVisualStyleBackColor = true;
+            this.refreshBtn.Location = new System.Drawing.Point(890, 21);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(103, 28);
+            this.refreshBtn.TabIndex = 3;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
             // 
             // AdminPage
             // 
@@ -227,6 +227,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClockInTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClockOutTime;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button refreshBtn;
     }
 }

@@ -21,6 +21,7 @@ namespace SEFinalProject {
 
         public AdminPage(MainWindow mainWindow) {
             InitializeComponent();
+            
             this.Activated += new System.EventHandler(this.AdminPage_Activated);
             this.mainWindow = mainWindow;
             this.deviceInfo = null;
@@ -34,6 +35,7 @@ namespace SEFinalProject {
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
             this.date = dateTimePicker1.Value;
+            this.refreshBtn.PerformClick();
         }
 
         private void deviceInfoBtn_Click(object sender, EventArgs e) {
