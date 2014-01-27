@@ -26,7 +26,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminPage));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.refreshBtn = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.EmployeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClockInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,10 +38,9 @@
             this.deleteBtn = new System.Windows.Forms.Button();
             this.enrollBtn = new System.Windows.Forms.Button();
             this.deviceInfoBtn = new System.Windows.Forms.Button();
-            this.refreshBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,9 +62,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.refreshBtn);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dataGridView);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -74,21 +75,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Report";
             // 
-            // dataGridView1
+            // refreshBtn
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.refreshBtn.Location = new System.Drawing.Point(890, 21);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(103, 28);
+            this.refreshBtn.TabIndex = 3;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EmployeeID,
             this.EmployeeName,
             this.ClockInTime,
             this.ClockOutTime});
-            this.dataGridView1.Location = new System.Drawing.Point(13, 54);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(980, 352);
-            this.dataGridView1.TabIndex = 2;
+            this.dataGridView.Location = new System.Drawing.Point(13, 54);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.Size = new System.Drawing.Size(980, 352);
+            this.dataGridView.TabIndex = 2;
             // 
             // EmployeeID
             // 
@@ -182,15 +193,6 @@
             this.deviceInfoBtn.UseVisualStyleBackColor = true;
             this.deviceInfoBtn.Click += new System.EventHandler(this.deviceInfoBtn_Click);
             // 
-            // refreshBtn
-            // 
-            this.refreshBtn.Location = new System.Drawing.Point(890, 21);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(103, 28);
-            this.refreshBtn.TabIndex = 3;
-            this.refreshBtn.Text = "Refresh";
-            this.refreshBtn.UseVisualStyleBackColor = true;
-            // 
             // AdminPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,10 +205,11 @@
             this.Name = "AdminPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrator Page";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminPage_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -222,7 +225,7 @@
         private System.Windows.Forms.Button deviceInfoBtn;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClockInTime;

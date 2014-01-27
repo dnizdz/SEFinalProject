@@ -79,6 +79,7 @@
             this.pictureBox.Location = new System.Drawing.Point(3, 3);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(219, 205);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 
@@ -140,7 +141,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(703, 26);
             this.nameTextBox.TabIndex = 2;
-            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
+            this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
             // 
             // roleLabel
             // 

@@ -29,6 +29,10 @@ namespace SEFinalProject {
             this.enrollmentForm = null;
         }
 
+        private void refreshBtn_Click(object sender, EventArgs e) {
+
+        }
+
         private void AdminPage_Activated(object sender, EventArgs e) {
             this.groupBox1.Focus();
         }
@@ -60,6 +64,10 @@ namespace SEFinalProject {
             }
 
             dataDeletionForm.Show();
+        }
+
+        private void AdminPage_FormClosing(object sender, FormClosingEventArgs e) {
+            mainWindow.isAdminPageOpen = false;
         }
     }
 }
