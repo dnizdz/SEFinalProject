@@ -218,7 +218,7 @@ namespace SEFinalProject {
             return true;
         }
 
-        private Bitmap CreateBitmap(Byte[] bytes, Int32 width, Int32 height) {
+        public Bitmap CreateBitmap(Byte[] bytes, Int32 width, Int32 height) {
             Byte[] rgbBytes = new byte[bytes.Length * 3];
 
             for (Int32 i = 0; i <= bytes.Length - 1; i++) {
