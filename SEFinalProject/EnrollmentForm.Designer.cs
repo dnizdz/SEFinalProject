@@ -93,7 +93,7 @@
             this.commandLabel.Padding = new System.Windows.Forms.Padding(5);
             this.commandLabel.Size = new System.Drawing.Size(543, 201);
             this.commandLabel.TabIndex = 1;
-            this.commandLabel.Text = "Command Here";
+            this.commandLabel.Text = "Command Text Here";
             this.commandLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // saveBtn

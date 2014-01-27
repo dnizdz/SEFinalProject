@@ -119,7 +119,6 @@ namespace SEFinalProject {
                                         }
                                     }
                                     reader2.Close();
-                                    Console.WriteLine(hasClockedOut.ToString());
 
                                     if (!hasClockedOut) {
                                         MySqlCommand cmd3 = new MySqlCommand();

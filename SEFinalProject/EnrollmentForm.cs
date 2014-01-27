@@ -39,8 +39,6 @@ namespace SEFinalProject {
                     enrollThread.IsBackground = true;
                     enrollThread.Start();
                 }
-
-                this.saveBtn.Enabled = true;
             } else {
                 this.saveBtn.Enabled = false;
                 this.commandLabel.Text = String.Empty;
@@ -59,9 +57,18 @@ namespace SEFinalProject {
                 if (enrollmentResult.ResultCode == Constants.ResultCode.DP_SUCCESS) {
                     this.Invoke(u, new Object[] { null, "The Fingerprint Data Has Been Captured." });
                     fmd = enrollmentResult.Data;
+
+                    EnableSaveBtnDelegate e = new EnableSaveBtnDelegate(EnableSaveBtn);
+                    this.Invoke(e, new Object[] { true });
+
                     break;
                 }
             }
+        }
+
+        private delegate void EnableSaveBtnDelegate(Boolean state);
+        private void EnableSaveBtn(Boolean state) {
+            this.saveBtn.Enabled = state;
         }
 
         private IEnumerable<Fmd> CaptureAndExtractFmd() {
@@ -103,7 +110,7 @@ namespace SEFinalProject {
         private void UpdateCommandTextAndPictureBox(Bitmap bmp, String text) {
             this.pictureBox.Image = bmp;
             this.pictureBox.Refresh();
-            
+
             this.commandLabel.Text = text;
         }
 
