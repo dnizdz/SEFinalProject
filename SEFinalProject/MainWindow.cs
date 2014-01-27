@@ -96,7 +96,7 @@ namespace SEFinalProject {
                             if (compareResult.Score < PROBABILITY_ONE / 100000) {
                                 result = new EmployeeData();
 
-                                result.empID = reader1.GetInt64("empID");
+                                result.empID = reader1.GetInt32("empID");
                                 result.name = reader1.GetString("name");
                                 result.role = reader1.GetString("role");
                                 result.fmd = currentChecked;
@@ -106,7 +106,7 @@ namespace SEFinalProject {
                                 // Check Attendance
                                 MySqlCommand cmd2 = new MySqlCommand();
                                 cmd2.Connection = mySQLConnection;
-                                cmd2.CommandText = "SELECT * FROM attendance WHERE empID = " + result.empID + " AND clockin BETWEEN \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00\' AND \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59\';";
+                                cmd2.CommandText = "SELECT * FROM attendance WHERE empID = " + result.empID + " AND clockin BETWEEN \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00\' AND \'" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59\'";
                                 MySqlDataReader reader2 = cmd2.ExecuteReader();
 
                                 if (reader2.HasRows) {

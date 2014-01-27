@@ -28,16 +28,16 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.refreshBtn = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.EmployeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClockInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClockOutTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.enrollBtn = new System.Windows.Forms.Button();
             this.deviceInfoBtn = new System.Windows.Forms.Button();
+            this.EmployeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClockInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClockOutTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -63,9 +63,9 @@
             // 
             this.groupBox1.Controls.Add(this.refreshBtn);
             this.groupBox1.Controls.Add(this.dataGridView);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.dateTimePicker);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
@@ -87,7 +87,9 @@
             // 
             // dataGridView
             // 
-            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -101,41 +103,13 @@
             this.dataGridView.Size = new System.Drawing.Size(980, 352);
             this.dataGridView.TabIndex = 2;
             // 
-            // EmployeeID
+            // dateTimePicker
             // 
-            this.EmployeeID.HeaderText = "Employee ID";
-            this.EmployeeID.Name = "EmployeeID";
-            this.EmployeeID.ReadOnly = true;
-            this.EmployeeID.Width = 125;
-            // 
-            // EmployeeName
-            // 
-            this.EmployeeName.HeaderText = "Employee Name";
-            this.EmployeeName.Name = "EmployeeName";
-            this.EmployeeName.ReadOnly = true;
-            this.EmployeeName.Width = 320;
-            // 
-            // ClockInTime
-            // 
-            this.ClockInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClockInTime.HeaderText = "Clock In";
-            this.ClockInTime.Name = "ClockInTime";
-            this.ClockInTime.ReadOnly = true;
-            // 
-            // ClockOutTime
-            // 
-            this.ClockOutTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClockOutTime.HeaderText = "Clock Out";
-            this.ClockOutTime.Name = "ClockOutTime";
-            this.ClockOutTime.ReadOnly = true;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(59, 22);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(825, 26);
-            this.dateTimePicker1.TabIndex = 1;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker.Location = new System.Drawing.Point(59, 22);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(825, 26);
+            this.dateTimePicker.TabIndex = 1;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label1
             // 
@@ -193,6 +167,34 @@
             this.deviceInfoBtn.UseVisualStyleBackColor = true;
             this.deviceInfoBtn.Click += new System.EventHandler(this.deviceInfoBtn_Click);
             // 
+            // EmployeeID
+            // 
+            this.EmployeeID.HeaderText = "Employee ID";
+            this.EmployeeID.Name = "EmployeeID";
+            this.EmployeeID.ReadOnly = true;
+            this.EmployeeID.Width = 125;
+            // 
+            // EmployeeName
+            // 
+            this.EmployeeName.HeaderText = "Employee Name";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            this.EmployeeName.Width = 500;
+            // 
+            // ClockInTime
+            // 
+            this.ClockInTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClockInTime.HeaderText = "Clock In";
+            this.ClockInTime.Name = "ClockInTime";
+            this.ClockInTime.ReadOnly = true;
+            // 
+            // ClockOutTime
+            // 
+            this.ClockOutTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClockOutTime.HeaderText = "Clock Out";
+            this.ClockOutTime.Name = "ClockOutTime";
+            this.ClockOutTime.ReadOnly = true;
+            // 
             // AdminPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,13 +225,13 @@
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button enrollBtn;
         private System.Windows.Forms.Button deviceInfoBtn;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Button refreshBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmployeeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClockInTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClockOutTime;
-        private System.Windows.Forms.Button refreshBtn;
     }
 }

@@ -12,7 +12,7 @@ namespace SEFinalProject {
             this.clockOut = null;
         }
 
-        public Int64 empID { get; set; }
+        public Int32 empID { get; set; }
         public String name { get; set; }
         public String role { get; set; }
         public Fmd fmd { get; set; }
