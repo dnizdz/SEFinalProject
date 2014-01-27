@@ -46,10 +46,18 @@ namespace SEFinalProject {
                 while (reader.Read()) {
                     Int32 empID = reader.GetInt32("empID");
                     String name = reader.GetString("name");
-                    DateTime clockin = DateTime.Parse(reader.GetString("clockin"));
-                    DateTime clockout = DateTime.Parse(reader.GetString("clockout"));
+                    String clockin = String.Empty;
+                    String clockout = String.Empty;
 
-                    dataGridView.Rows.Add(empID, name, clockin.ToString("h:mm:ss tt"), clockout.ToString("h:mm:ss tt"));
+                    if (!reader.IsDBNull(reader.GetOrdinal("clockin"))) {
+                        clockin = DateTime.Parse(reader.GetString("clockin")).ToString("h:mm:ss tt");
+                    }
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("clockout"))) {
+                        clockout = DateTime.Parse(reader.GetString("clockout")).ToString("h:mm:ss tt");
+                    }
+
+                    dataGridView.Rows.Add(empID, name, clockin, clockout);
                 }
 
                 reader.Close();

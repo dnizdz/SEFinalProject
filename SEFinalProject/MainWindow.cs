@@ -123,7 +123,7 @@ namespace SEFinalProject {
                                     if (!hasClockedOut) {
                                         MySqlCommand cmd3 = new MySqlCommand();
                                         cmd3.Connection = mySQLConnection;
-                                        cmd3.CommandText = "UPDATE attendance SET clockout=@clockout WHERE clockin BETWEEN @clockinstart AND @clockinend";
+                                        cmd3.CommandText = "UPDATE attendance SET clockout=@clockout WHERE empID = " + result.empID + " AND clockin BETWEEN @clockinstart AND @clockinend";
                                         cmd3.Prepare();
 
                                         cmd3.Parameters.AddWithValue("@clockout", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
