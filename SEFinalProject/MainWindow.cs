@@ -55,13 +55,6 @@ namespace SEFinalProject {
                 imageCaptureAndDBProcessingThread.IsBackground = true;
                 imageCaptureAndDBProcessingThread.Start();
             }
-
-            try {
-
-            } catch (MySqlException) {
-                MessageBox.Show(this, "Error Connecting To Database!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-            }
         }
 
         private void ImageCaptureAndDBProcessingThread() {
@@ -193,7 +186,7 @@ namespace SEFinalProject {
                 } else {
                     this.nameTextBox.Text = "Unknown";
                     this.roleTextBox.Text = "Unknown";
-                    this.operationTextBox.Text = "Unknown";
+                    this.operationTextBox.Text = "Nothing";
                     this.timeTextBox.Text = DateTime.Now.ToString("h:mm:ss tt");
                 }
             }

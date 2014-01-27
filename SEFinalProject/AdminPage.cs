@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DPCtlUruNet;
+using DPUruNet;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,7 @@ namespace SEFinalProject {
         private DateTime? date;
         private DeviceInfo deviceInfo;
         private DataDeletionForm dataDeletionForm;
+        private EnrollmentForm enrollmentForm;
 
         public AdminPage(MainWindow mainWindow) {
             InitializeComponent();
@@ -22,6 +25,7 @@ namespace SEFinalProject {
             this.mainWindow = mainWindow;
             this.deviceInfo = null;
             this.dataDeletionForm = null;
+            this.enrollmentForm = null;
         }
 
         private void AdminPage_Activated(object sender, EventArgs e) {
@@ -41,7 +45,11 @@ namespace SEFinalProject {
         }
 
         private void enrollBtn_Click(object sender, EventArgs e) {
+            if (enrollmentForm == null || enrollmentForm.IsDisposed) {
+                enrollmentForm = new EnrollmentForm(mainWindow);
+            }
 
+            enrollmentForm.Show();
         }
 
         private void deleteBtn_Click(object sender, EventArgs e) {
