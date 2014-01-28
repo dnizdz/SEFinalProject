@@ -69,6 +69,7 @@ namespace SEFinalProject {
 
                     this.idTextBox.Text = String.Empty;
                     this.nameLabel.Text = "Data Successfully Deleted.";
+                    this.deleteBtn.Enabled = false;
                 } catch (MySqlException) {
                     MessageBox.Show(this, "Error Deleting Data From Database!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     mainWindow.Close();
