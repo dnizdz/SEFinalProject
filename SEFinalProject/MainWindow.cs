@@ -264,7 +264,9 @@ namespace SEFinalProject {
                 fingerprintReader.Dispose();
             }
 
-            this.imageCaptureAndDBProcessingThread.Abort();
+            if (this.imageCaptureAndDBProcessingThread != null) {
+                this.imageCaptureAndDBProcessingThread.Abort();
+            }
         }
 
         private void MainWindow_Activated(object sender, EventArgs e) {
